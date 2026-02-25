@@ -50,6 +50,12 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  if (req.method === "GET" && req.url === "/") {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end("hello world from a");
+    return;
+  }
+
   if (req.method === "GET" && req.url.split("?")[0] === "/prime") {
     const url = new URL(req.url, `http://${req.headers.host}`);
     const duration = Math.min(parseInt(url.searchParams.get("duration") || "5000", 10), 60000);
